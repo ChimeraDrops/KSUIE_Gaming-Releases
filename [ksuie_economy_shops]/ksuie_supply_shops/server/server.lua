@@ -145,7 +145,7 @@ AddEventHandler("supplyshop:buy", function(price, item, lvl)
 				print(ItemData.ItemAmount)
 				ItemData.AddItem(1)
                 TriggerClientEvent("redemrp_notification:start", source, "Bought "..ItemInfo.label, 3, "success")
-                TriggerClientEvent('EconomyFactorCalc', source, 1, item, ItemData.ItemAmount, "blank")
+                TriggerEvent('SupplyEconomyFactorCalc', source, 1, item, ItemData.ItemAmount, "blank")
             else 
                 TriggerClientEvent('redemrp_gunshop:alert', source, "You are not a high enough level!")
             end
@@ -175,7 +175,7 @@ AddEventHandler('supplyshop:sell', function(price, supply)
 			user.addXP(totalxp)
             ItemData.RemoveItem(totalitem)
             TriggerClientEvent("redemrp_notification:start", _source, "You sold " .. totalitem .." "..ItemInfo.label.." for $" ..totalmoney.." and got "..totalxp.."XP", 5)
-            TriggerClientEvent('EconomyFactorCalc', source, 0, supply, totalitem, "blank")
+            TriggerEvent('SupplyEconomyFactorCalc', source, 0, supply, totalitem, "blank")
 
         else
             TriggerClientEvent("redemrp_notification:start", _source, 'You dont have any '..ItemInfo.label..' to sell', 5)
@@ -260,25 +260,25 @@ AddEventHandler("redemrp:playerLoaded", function(source, user)
         if timeron then
             if timer <= 0 then
             --supply
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p12, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p12, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p13, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p13, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p14, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p14, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p15, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p15, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p16, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p16, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p17, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p17, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p18, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p18, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p19, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p19, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p20, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p20, 50, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p21, 50, "blank" )
+                TriggerEvent('SupplyEconomyFactorCalc',_source, 1, p21, 50, "blank" )
                 Citizen.Wait(5000)
                 timer = 600
                 print("Supply Economy Updated")
@@ -325,5 +325,180 @@ AddEventHandler('UpdateMultiplier', function(product, mult, econfactor)
     end)
     Citizen.Wait(300)
     print("S329 Supply: Identifier="..identifier.." multiplier="..multi.." factor="..fac.." DBUPDATED")
+
+end)
+--=============================================================Economy========================================================
+RegisterServerEvent('SupplyEconomyFactorCalc')
+AddEventHandler('SupplyEconomyFactorCalc', function( transaction, product, amount, blank)
+    local buy_sell = transaction
+    local productFactored = product
+    local added = amount
+
+    if product == "blueberry" then
+        if buy_sell == 0 then
+            blueberry_econFactor = blueberry_econFactor-added
+        elseif buy_sell == 1 then
+            blueberry_econFactor = blueberry_econFactor+added
+        end
+        Citizen.Wait(100)
+        if blueberry_econFactor > 2000 then
+            blueberry_econFactor = 2000
+        elseif blueberry_econFactor <= 0 then
+            blueberry_econFactor = 1
+        end
+        blueberry_mult  = blueberry_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, blueberry_mult  , blueberry_econFactor)
+
+    elseif product == "cloth" then
+        if buy_sell == 0 then
+            cloth_econFactor = cloth_econFactor-added
+        elseif buy_sell == 1 then
+            cloth_econFactor = cloth_econFactor+added
+        end
+        Citizen.Wait(100)
+        if cloth_econFactor > 2000 then
+            cloth_econFactor = 2000
+        elseif cloth_econFactor <= 0 then
+            cloth_econFactor = 1
+        end
+        cloth_mult = cloth_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, cloth_mult , cloth_econFactor)
+
+    elseif product == "rope" then
+        if buy_sell == 0 then
+            rope_econFactor = rope_econFactor-added
+        elseif buy_sell == 1 then
+            rope_econFactor = rope_econFactor+added
+        end
+        Citizen.Wait(100)
+        if rope_econFactor > 2000 then
+            rope_econFactor = 2000
+        elseif rope_econFactor <= 0 then
+            rope_econFactor = 1
+        end
+        rope_mult = rope_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, rope_mult , rope_econFactor)
+
+    elseif product == "woodenplanks" then
+        if buy_sell == 0 then
+            woodenplanks_econFactor = woodenplanks_econFactor-added
+        elseif buy_sell == 1 then
+            woodenplanks_econFactor = woodenplanks_econFactor+added
+        end
+        Citizen.Wait(100)
+        if woodenplanks_econFactor > 2000 then
+            woodenplanks_econFactor = 2000
+        elseif woodenplanks_econFactor <= 0 then
+            woodenplanks_econFactor = 1
+        end
+        woodenplanks_mult = woodenplanks_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, woodenplanks_mult , woodenplanks_econFactor)
+
+    elseif product == "stones" then
+        if buy_sell == 0 then
+            stones_econFactor = stones_econFactor-added
+        elseif buy_sell == 1 then
+            stones_econFactor = stones_econFactor+added
+        end
+        Citizen.Wait(100)
+        if stones_econFactor > 2000 then
+            stones_econFactor = 2000
+        elseif stones_econFactor <= 0 then
+            stones_econFactor = 1
+        end
+        stones_mult = stones_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, stones_mult , stones_econFactor)
+
+    elseif product == "hitch" then
+        if buy_sell == 0 then
+            hitch_econFactor = hitch_econFactor-added
+        elseif buy_sell == 1 then
+            hitch_econFactor = hitch_econFactor+added
+        end
+        Citizen.Wait(100)
+        if hitch_econFactor > 2000 then
+            hitch_econFactor = 2000
+        elseif hitch_econFactor <= 0 then
+            hitch_econFactor = 1
+        end
+        hitch_mult = hitch_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, hitch_mult , hitch_econFactor)
+        
+    elseif product == "woodenlogs" then
+        if buy_sell == 0 then
+            woodenlogs_econFactor = woodenlogs_econFactor-added
+        elseif buy_sell == 1 then
+            woodenlogs_econFactor = woodenlogs_econFactor+added
+        end
+        Citizen.Wait(100)
+        if woodenlogs_econFactor > 2000 then
+            woodenlogs_econFactor = 2000
+        elseif woodenlogs_econFactor <= 0 then
+            woodenlogs_econFactor = 1
+        end
+        woodenlogs_mult = woodenlogs_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, woodenlogs_mult , woodenlogs_econFactor)
+
+    elseif product == "tent" then
+        if buy_sell == 0 then
+            tent_econFactor = tent_econFactor-added
+        elseif buy_sell == 1 then
+            tent_econFactor = tent_econFactor+added
+        end
+        Citizen.Wait(100)
+        if tent_econFactor > 2000 then
+            tent_econFactor = 2000
+        elseif tent_econFactor <= 0 then
+            tent_econFactor = 1
+        end
+        tent_mult = tent_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, tent_mult , tent_econFactor)
+
+    elseif product == "stick" then
+        if buy_sell == 0 then
+            stick_econFactor = stick_econFactor-added
+        elseif buy_sell == 1 then
+            stick_econFactor = stick_econFactor+added
+        end
+        Citizen.Wait(100)
+        if stick_econFactor > 2000 then
+            stick_econFactor = 2000
+        elseif stick_econFactor <= 0 then
+            stick_econFactor = 1
+        end
+        stick_mult = stick_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, stick_mult , stick_econFactor)
+
+    elseif product == "emptybottle" then
+        if buy_sell == 0 then
+            emptybottle_econFactor = emptybottle_econFactor-added
+        elseif buy_sell == 1 then
+            emptybottle_econFactor = emptybottle_econFactor+added
+        end
+        Citizen.Wait(100)
+        if emptybottle_econFactor > 2000 then
+            emptybottle_econFactor = 2000
+        elseif emptybottle_econFactor <= 0 then
+            emptybottle_econFactor = 1
+        end
+        emptybottle_mult = emptybottle_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, emptybottle_mult , emptybottle_econFactor)
+
+    end
+    Citizen.Wait(3)
+end)
+
+RegisterNetEvent('UpdateMultiplier')
+AddEventHandler('UpdateMultiplier', function(product, mult, econfactor)
+    local identifier = product
+    local multi = mult
+    local fac = econfactor
+    MySQL.Async.execute('UPDATE economy SET {multiplier = @multiplier, factor = @factor} WHERE identifier = @identifier', {
+        ['@identifier']  = identifier,
+        ['@multiplier']  = multi,
+        ['@factor'] = fac
+    }, function ()
+    end)
+    print("S437: Identifier="..identifier.." multiplier="..multi.." factor="..fac.." DBUPDATED")
 
 end)

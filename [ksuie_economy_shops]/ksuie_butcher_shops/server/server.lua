@@ -183,7 +183,7 @@ AddEventHandler("meatshop:buy", function(price, item, lvl)
 				print(ItemData.ItemAmount)
 				ItemData.AddItem(1)
                 TriggerClientEvent("redemrp_notification:start", source, "Bought "..ItemInfo.label, 3, "success")
-                TriggerClientEvent('EconomyFactorCalc', source, transaction_buy, item, 1, "blank")
+                TriggerEvent('EconomyFactorCalc', source, transaction_buy, item, 1, "blank")
                 print("S189: RECALC ECON FACTOR"..transaction_buy.." "..item.." "..1)
             else 
                 TriggerClientEvent('redemrp_gunshop:alert', source, "You are not a high enough level!")
@@ -215,7 +215,7 @@ AddEventHandler('meatshop:sell', function(price, meat)
 			user.addXP(totalxp)
             ItemData.RemoveItem(totalitem)
             TriggerClientEvent("redemrp_notification:start", _source, "You sold " .. totalitem .." "..ItemInfo.label.." for $" ..totalmoney.." and got "..totalxp.."XP", 5)
-            TriggerClientEvent('EconomyFactorCalc', source, transaction_sell, meat, totalitem, "blank")
+            TriggerEvent('EconomyFactorCalc', source, transaction_sell, meat, totalitem, "blank")
             print("S221: RECALC ECON FACTOR"..transaction_sell.." "..meat.." "..totalitem)
 
 
@@ -265,7 +265,7 @@ AddEventHandler("cookedmeatshop:buy", function(price, item, lvl)
 				print(ItemData.ItemAmount)
 				ItemData.AddItem(1)
                 TriggerClientEvent("redemrp_notification:start", source, "Bought "..ItemInfo.label, 3, "success")
-                TriggerClientEvent('EconomyFactorCalc', source, 1, EconConvert, 1, "blank")
+                TriggerEvent('EconomyFactorCalc', source, 1, EconConvert, 1, "blank")
                 print("S271: RECALC ECON FACTOR"..transaction_buy.." "..EconConvert.." "..1)
             else 
                 TriggerClientEvent('redemrp_gunshop:alert', source, "You are not a high enough level!")
@@ -323,7 +323,7 @@ AddEventHandler('cookedmeatshop:sell', function(price, meat)
 			user.addXP(totalxp)
             ItemData.RemoveItem(totalitem)
             TriggerClientEvent("redemrp_notification:start", _source, "You sold " .. totalitem .." "..ItemInfo.label.." for $" ..totalmoney.." and got "..totalxp.."XP", 5)
-            TriggerClientEvent('EconomyFactorCalc', source, 0, EconConvert, totalitem, "blank")
+            TriggerEvent('EconomyFactorCalc', source, 0, EconConvert, totalitem, "blank")
             print("S189: RECALC ECON FACTOR"..transaction_sell.." "..EconConvert.." "..totalitem)
 
         else
@@ -418,27 +418,27 @@ AddEventHandler("redemrp:playerLoaded", function(source, user)
         if timeron then
             if timer <= 0 then
                 --meat
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p1, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p1, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p2, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p2, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p3, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p3, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p4, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p4, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p5, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p5, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p6, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p6, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p7, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p7, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p8, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p8, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p9, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p9, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p10, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p10, 50)
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p11, 50)
+                TriggerEvent('EconomyFactorCalc',_source, 1, p11, 50)
                     Citizen.Wait(5000)
                     timer = 600
                     print("Meat Economy Updated")
@@ -486,3 +486,183 @@ AddEventHandler('UpdateMultiplier', function(product, mult, econfactor)
     print("S488 Meat: Identifier="..identifier.." multiplier="..multi.." factor="..fac.." DBUPDATED")
 
 end)
+
+--UPDATE MULTIPLIER WHEN NO PLAYERS ONLINE
+RegisterServerEvent('EconomyFactorCalc')
+AddEventHandler('EconomyFactorCalc', function( transaction, product, amount)
+    Citizen.Wait(300)
+    print("C348:EconomyFactorCalc: Transaction ="..transaction.." Product = "..product.." Amount = "..amount)
+    local buy_sell = transaction
+    local productFactored = product
+    local added = amount
+    print("C249: Updating Economy Factor: VariablesBrought: Transaction = "..buy_sell.." Product = "..productFactored.."Amount = "..added)
+
+    if product == "biggame" then
+        if buy_sell == 0 then
+            biggame_econFactor = biggame_econFactor-added
+        elseif buy_sell == 1 then
+            biggame_econFactor = biggame_econFactor+added
+        end
+        Citizen.Wait(100)
+        if biggame_econFactor > 2000 then
+            biggame_econFactor = 2000
+        elseif biggame_econFactor <= 0 then
+            biggame_econFactor = 1
+        end
+        biggame_mult = biggame_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, biggame_mult, biggame_econFactor)
+        print("C369: VarSent to UpdateMultiplier: product="..product.." EconFactor = "..biggame_econFactor.." Multiplier = "..biggame_mult)
+
+    elseif product == "venison" then
+        if buy_sell == 0 then
+            venison_econFactor = venison_econFactor-added
+        elseif buy_sell == 1 then
+            venison_econFactor = venison_econFactor+added
+        end
+        Citizen.Wait(100)
+        if venison_econFactor > 2000 then
+            venison_econFactor = 2000
+        elseif venison_econFactor <= 0 then
+            venison_econFactor = 1
+        end
+        venison_mult  = venison_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, venison_mult , venison_econFactor)
+
+    elseif product == "beef" then
+        if buy_sell == 0 then
+            beef_econFactor = beef_econFactor-added
+        elseif buy_sell == 1 then
+            beef_econFactor = beef_econFactor+added
+        end
+        Citizen.Wait(100)
+        if beef_econFactor > 2000 then
+            beef_econFactor = 2000
+        elseif beef_econFactor <= 0 then
+            beef_econFactor = 1
+        end
+        beef_mult   = beef_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, beef_mult  , beef_econFactor)
+
+    elseif product == "aligatormeat" then
+        if buy_sell == 0 then
+            aligatormeat_econFactor = aligatormeat_econFactor-added
+        elseif buy_sell == 1 then
+            aligatormeat_econFactor = aligatormeat_econFactor+added
+        end
+        Citizen.Wait(100)
+        if aligatormeat_econFactor > 2000 then
+            aligatormeat_econFactor = 2000
+        elseif aligatormeat_econFactor <= 0 then
+            aligatormeat_econFactor = 1
+        end
+        aligatormeat_mult    = aligatormeat_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, aligatormeat_mult   , aligatormeat_econFactor)
+
+    elseif product == "bird" then
+        if buy_sell == 0 then
+            bird_econFactor = bird_econFactor-added
+        elseif buy_sell == 1 then
+            bird_econFactor = bird_econFactor+added
+        end
+        Citizen.Wait(100)
+        if bird_econFactor > 2000 then
+            bird_econFactor = 2000
+        elseif bird_econFactor <= 0 then
+            bird_econFactor = 1
+        end
+        bird_mult = bird_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, bird_mult, bird_econFactor)
+
+    elseif product == "game" then
+        if buy_sell == 0 then
+            game_econFactor = game_econFactor-added
+        elseif buy_sell == 1 then
+            game_econFactor = game_econFactor+added
+        end
+        Citizen.Wait(100)
+        if game_econFactor > 2000 then
+            game_econFactor = 2000
+        elseif game_econFactor <= 0 then
+            game_econFactor = 1
+        end
+        game_mult  = game_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, game_mult , game_econFactor)
+        
+    elseif product == "pork" then
+        if buy_sell == 0 then
+            pork_econFactor = pork_econFactor-added
+        elseif buy_sell == 1 then
+            pork_econFactor = pork_econFactor+added
+        end
+        Citizen.Wait(100)
+        if pork_econFactor > 2000 then
+            pork_econFactor = 2000
+        elseif pork_econFactor <= 0 then
+            pork_econFactor = 1
+        end
+        pork_mult   = pork_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, pork_mult  , pork_econFactor)
+
+    elseif product == "fishmeat" then
+        if buy_sell == 0 then
+            fishmeat_econFactor = fishmeat_econFactor-added
+        elseif buy_sell == 1 then
+            fishmeat_econFactor = fishmeat_econFactor+added
+        end
+        Citizen.Wait(100)
+        if fishmeat_econFactor > 2000 then
+            fishmeat_econFactor = 2000
+        elseif fishmeat_econFactor <= 0 then
+            fishmeat_econFactor = 1
+        end
+        fishmeat_mult    = fishmeat_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, fishmeat_mult   , fishmeat_econFactor)
+
+    elseif product == "herptile" then
+        if buy_sell == 0 then
+            herptile_econFactor = herptile_econFactor-added
+        elseif buy_sell == 1 then
+            herptile_econFactor = herptile_econFactor+added
+        end
+        Citizen.Wait(100)
+        if herptile_econFactor > 2000 then
+            herptile_econFactor = 2000
+        elseif herptile_econFactor <= 0 then
+            herptile_econFactor = 1
+        end
+        herptile_mult = herptile_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, herptile_mult, herptile_econFactor)
+        
+    elseif product == "stringy" then
+        if buy_sell == 0 then
+            stringy_econFactor = stringy_econFactor-added
+        elseif buy_sell == 1 then
+            stringy_econFactor = stringy_econFactor+added
+        end
+        Citizen.Wait(100)
+        if stringy_econFactor > 2000 then
+            stringy_econFactor = 2000
+        elseif stringy_econFactor <= 0 then
+            stringy_econFactor = 1
+        end
+        stringy_mult = stringy_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, stringy_mult , stringy_econFactor)
+
+    elseif product == "mutton" then
+        if buy_sell == 0 then
+            mutton_econFactor = mutton_econFactor-added
+        elseif buy_sell == 1 then
+            mutton_econFactor = mutton_econFactor+added
+        end
+        Citizen.Wait(100)
+        if mutton_econFactor > 2000 then
+            mutton_econFactor = 2000
+        elseif mutton_econFactor <= 0 then
+            mutton_econFactor = 1
+        end
+        mutton_mult = mutton_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, mutton_mult , mutton_econFactor)
+      end
+
+end)
+

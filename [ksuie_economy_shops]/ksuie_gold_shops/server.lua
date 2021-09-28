@@ -47,7 +47,7 @@ AddEventHandler("goldshop:buy", function(price, item, lvl)
 				print(ItemData.ItemAmount)
 				ItemData.AddItem(1)
                 TriggerClientEvent("redemrp_notification:start", source, "Bought "..ItemInfo.label, 3, "success")
-                TriggerClientEvent('EconomyFactorCalc', source, 1, item, ItemData.ItemAmount, "blank")
+                TriggerEvent('GoldEconomyFactorCalc', source, 1, item, ItemData.ItemAmount, "blank")
 
             else 
                 TriggerClientEvent('redemrp_gunshop:alert', source, "You are not a high enough level!")
@@ -78,7 +78,7 @@ AddEventHandler('goldshop:sell', function(price, gold)
 			user.addXP(totalxp)
             ItemData.RemoveItem(totalitem)
             TriggerClientEvent("redemrp_notification:start", _source, "You sold " .. totalitem .." "..ItemInfo.label.." for $" ..totalmoney.." and got "..totalxp.."XP", 5)
-            TriggerClientEvent('EconomyFactorCalc', source, 0, gold, totalitem, "blank")
+            TriggerEvent('GoldEconomyFactorCalc', source, 0, gold, totalitem, "blank")
 
         else
             TriggerClientEvent("redemrp_notification:start", _source, 'You dont have any '..ItemInfo.label..' to sell', 5)
@@ -125,9 +125,9 @@ AddEventHandler("redemrp:playerLoaded", function(source, user)
         if timeron then
             if timer <= 0 then
             --gold
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p22, 10, "blank" )
+                TriggerEvent('GoldEconomyFactorCalc',_source, 1, p22, 10, "blank" )
                 Citizen.Wait(300)
-                TriggerClientEvent('EconomyFactorCalc',_source, 1, p23, 10, "blank" )
+                TriggerEvent('GoldEconomyFactorCalc',_source, 1, p23, 10, "blank" )
                 Citizen.Wait(5000)
                 timer = 600
                 print("Meat Economy Updated")
@@ -173,3 +173,44 @@ AddEventHandler('UpdateMultiplier', function(product, mult, econfactor)
     Citizen.Wait(300)
     print("C175 Gold: Identifier="..identifier.." multiplier="..multi.." factor="..fac.." DBUPDATED")
 end)
+--=============================================Economy============================================
+
+RegisterServerEvent('GoldEconomyFactorCalc')
+AddEventHandler('GoldEconomyFactorCalc', function( transaction, product, amount, blank)
+    local buy_sell = transaction
+    local productFactored = product
+    local added = amount
+
+    if product == "golden_nugget" then
+        if buy_sell == 0 then
+            golden_nugget_econFactor = golden_nugget_econFactor-added
+        elseif buy_sell == 1 then
+            golden_nugget_econFactor = golden_nugget_econFactor+added
+        end
+        Citizen.Wait(100)
+        if golden_nugget_econFactor > 4000 then
+            golden_nugget_econFactor = 4000
+        elseif golden_nugget_econFactor <= 0 then
+            golden_nugget_econFactor = 1
+    end
+    golden_nugget_mult = golden_nugget_econFactor/1000
+    TriggerServerEvent('UpdateMultiplier', product, golden_nugget_mult , golden_nugget_econFactor)
+
+    elseif product == "goldbar" then
+        if buy_sell == 0 then
+            goldbar_econFactor = goldbar_econFactor-added
+        elseif buy_sell == 1 then
+            goldbar_econFactor = goldbar_econFactor+added
+        end
+        Citizen.Wait(100)
+        if goldbar_econFactor > 2000 then
+            goldbar_econFactor = 2000
+        elseif goldbar_econFactor <= 0 then
+            goldbar_econFactor = 1
+        end
+        goldbar_mult = goldbar_econFactor/1000
+        TriggerServerEvent('UpdateMultiplier', product, goldbar_mult , goldbar_econFactor)
+    end
+Citizen.Wait(3)
+end)
+
