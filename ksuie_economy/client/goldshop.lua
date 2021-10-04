@@ -1,41 +1,39 @@
+-- Created by KSUIE_Gaming for MiscreantMafia RP : Discord : https://discord.gg/vydyEUgeDw
+-- Ksuie.Gaming Twitch : www.twitch.tv/ksuie
+
 MenuData = {}
 TriggerEvent("redemrp_menu_base:getData",function(call)
     MenuData = call
 end)
 
---add gold locations
+--Gold Shop Locations
 local goldshop = {
-    {x = 558.75, y = 1696.42, z = 185.87},
-     {x = 2578.17, y = 783.28, z = 83.79},
-     {x = -2193.67, y = 717.01, z = 122.3},
-     {x = -1978.49, y = -1667.97, z = 118.18},
-     {x = -5221.2, y = -3460.13, z = -21.26},
-    {x = -5212.28, y = -2113.8, z = 12.68},
-     {x = -3954.65, y = -2127.17, z = -4.15},
- }
-local golden_nugget_price = 0
-local goldbar_price =0
-local golden_nugget_econFactor = 1000
-local goldbar_econFactor = 1000
+    {x = 559.65, y = 1696.67, z = 185.88},
+--    {x = 00, y = 00, z = 00},
+}
 
-RegisterNetEvent('ReceiveGoldFactors')
-AddEventHandler('ReceiveGoldFactors', function ( golden_nugget_econFactor, goldbar_econFactor, blank)
-    golden_nugget_econFactor = golden_nugget_econFactor
-    goldbar_econFactor = goldbar_econFactor
+--Gold Shop Variables
+local golden_nugget_econFactor
+local goldbar_econFactor
+local golden_nugget_multi
+local goldbar_multi
+local golden_nugget_price
+local goldbar_price
+
+RegisterNetEvent("Client:goldshop:ReceiveEconVariables")
+AddEventHandler("Client:goldshop:ReceiveEconVariables", function(item, efac, mult, price)
+    if item == 'golden_nugget' then
+        golden_nugget_econFactor = efac 
+        golden_nugget_multi = mult
+        golden_nugget_price = (math.floor(price*golden_nugget_multi*100)/100)
+    end
+    if item == 'goldbar' then
+        goldbar_econFactor = efac 
+        goldbar_multi = mult
+        goldbar_price = (math.floor(price*goldbar_multi*100)/100)
+    end
+    print("Goldshop MSG1: Gold Economy Updated: "..item)
 end)
-
-local golden_nugget_mult = golden_nugget_econFactor/1000
-local goldbar_mult = golden_nugget_econFactor/1000
-
- RegisterNetEvent('GoldPriceFetched')
- AddEventHandler('GoldPriceFetched', function( goldnug, gbar, blank)
-    golden_nugget_price = goldnug
-    print("C34: price"..goldnug)
-    goldbar_price = gbar
-    print("C36: price"..gbar)
-
- end)
- 
 
 --===========================================================GOLD SHOP START====================================================================
 local gactive = false
@@ -117,18 +115,18 @@ Citizen.CreateThread(function()
             end
             WarMenu.Display()
         elseif WarMenu.IsMenuOpened('buyg') then
-            if WarMenu.Button('Buy Golden Nugget for ~pa~$'..(math.floor(golden_nugget_price*golden_nugget_mult*100)/100)) then
-               TriggerServerEvent("goldshop:buy", (math.floor(golden_nugget_price*golden_nugget_mult*100)/100), "golden_nugget", 0)  
-            elseif WarMenu.Button('Buy Gold Bar for ~pa~$'..(math.floor(goldbar_price*goldbar_mult*100)/100)) then
-               TriggerServerEvent("goldshop:buy", (math.floor(goldbar_price*goldbar_mult*100)/100), "goldbar", 0)
+            if WarMenu.Button('Buy Golden Nugget for ~pa~$'..golden_nugget_price) then
+               TriggerServerEvent("goldshop:buy", golden_nugget_price, 'golden_nugget', 0)  
+            elseif WarMenu.Button('Buy Gold Bar for ~pa~$'..goldbar_price) then
+               TriggerServerEvent("goldshop:buy", goldbar_price, 'goldbar', 0)
             end
             WarMenu.Display()
 			
         elseif WarMenu.IsMenuOpened('sellg') then
-            if WarMenu.Button('Sell your Golden Nuggets for ~pa~$'..(math.floor(golden_nugget_price*golden_nugget_mult*100)/100)..' each') then
-               TriggerServerEvent("goldshop:sell", (math.floor(golden_nugget_price*golden_nugget_mult*100)/100), "golden_nugget")  
-            elseif WarMenu.Button('Sell your Gold Bars for ~pa~$'..(math.floor(goldbar_price*goldbar_mult*100)/100)..' each') then
-               TriggerServerEvent("goldshop:sell", (math.floor(goldbar_price*goldbar_mult*100)/100), "goldbar")
+            if WarMenu.Button('Sell your Golden Nuggets for ~pa~$'..(math.floor(golden_nugget_price*.75*100)/100)..' each') then
+               TriggerServerEvent("goldshop:sell", (math.floor(golden_nugget_price*.75*100)/100), 'golden_nugget')  
+            elseif WarMenu.Button('Sell your Gold Bars for ~pa~$'..(math.floor(goldbar_price*.75*100)/100)..' each') then
+               TriggerServerEvent("goldshop:sell", (math.floor(goldbar_price*.75*100)/100), 'goldbar')
             end
             WarMenu.Display()
         
@@ -148,7 +146,9 @@ Citizen.CreateThread(function()
                 gactive = true
             end
             if PromptHasHoldModeCompleted(gShopPrompt) then
-                TriggerServerEvent('GoldPrice')
+                TriggerServerEvent('FetchEconomyData', 'golden_nugget')
+                Citizen.Wait(3)
+                TriggerServerEvent('FetchEconomyData', 'goldbar')                
                 Citizen.Wait(1000)
  
 			WarMenu.OpenMenu('goldshop')
@@ -173,4 +173,5 @@ AddEventHandler('ksuie_gold_shops:alert', function(txt)
     Citizen.InvokeNative(0xFA233F8FE190514C, str)
     Citizen.InvokeNative(0xE9990552DEC71600)
 end)
+
 

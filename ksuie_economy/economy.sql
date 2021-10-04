@@ -16,36 +16,42 @@
 DROP TABLE IF EXISTS `economy`;
 CREATE TABLE IF NOT EXISTS `economy` (
   `identifier` varchar(50) DEFAULT NULL,
+  `price` double DEFAULT NULL,
   `multiplier` double DEFAULT NULL,
   `factor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table redemrp.economy: ~23 rows (approximately)
+-- Dumping data for table redemrp.economy: ~24 rows (approximately)
 /*!40000 ALTER TABLE `economy` DISABLE KEYS */;
-REPLACE INTO `economy` (`identifier`, `multiplier`, `factor`) VALUES
-	('biggame', 1.143, 1143),
-	('venison', 1.16, 1160),
-	('beef', 1.16, 1160),
-	('aligatormeat', 1.201, 1201),
-	('bird', 1.16, 1160),
-	('game', 1.161, 1161),
-	('pork', 1.16, 1160),
-	('fishmeat', 1.16, 1160),
-	('herptile', 1.16, 1160),
-	('stringy', 1.16, 1160),
-	('mutton', 1.16, 1160),
-	('blueberry', 1.05, 1050),
-	('cloth', 1.05, 1050),
-	('rope', 1.05, 1050),
-	('woodenplanks', 1.1, 1100),
-	('stones', 1.05, 1050),
-	('hitch', 1.05, 1050),
-	('woodenlogs', 1, 1000),
-	('tent', 1.05, 1050),
-	('stick', 1.05, 1050),
-	('emptybottle', 1.05, 1050),
-	('golden_nugget', 1.01, 1010),
-	('goldbar', 1.01, 1010);
+REPLACE INTO `economy` (`identifier`, `price`, `multiplier`, `factor`) VALUES
+	('biggame', 2, 1.13, 1140),
+	('venison', 2, 1.13, 1140),
+	('beef', 3, 1.2, 1200),
+	('aligatormeat', 3, 1.2, 1205),
+	('bird', 1, 1.2, 1200),
+	('game', 1.5, 1.2, 1200),
+	('pork', 2, 1.2, 1200),
+	('fishmeat', 1.5, 1.2, 1200),
+	('herptile', 1.25, 1.2, 1200),
+	('stringy', 0.75, 1.2, 1200),
+	('mutton', 2, 1.2, 1200),
+	('blueberry', 0.15, 1.2, 1200),
+	('cloth', 0.25, 1.19, 1199),
+	('rope', 0.5, 1.2, 1200),
+	('woodenplanks', 0.75, 1.36, 1360),
+	('stones', 0.5, 1.2, 1200),
+	('hitch', 5, 1.2, 1200),
+	('woodenlogs', 2, 1, 1000),
+	('tent', 10, 1.22, 1220),
+	('stick', 0.25, 1.2, 1200),
+	('emptybottle', 0.3, 1.2, 1200),
+	('golden_nugget', 10, 1.2, 1200),
+	('goldbar', 50, 1.19, 1195),
+	('wheat', 0.15, 1.2, 1200),
+	('apple', 0.25, 1.2, 1200),
+	('bread', 1, 1.2, 1200),
+	('water', 1, 1.2, 1209),
+	('cigar', 2.5, 1.2, 1200);
 /*!40000 ALTER TABLE `economy` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
