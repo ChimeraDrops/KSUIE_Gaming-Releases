@@ -613,8 +613,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             biggame_EF = biggame_EF + added
         end
         Citizen.Wait(100)
-        if biggame_EF > 2000 then
-            biggame_EF = 2000
+        if biggame_EF > 5000 then
+            biggame_EF = 5000
         elseif biggame_EF <= 0 then
             biggame_EF = 1
         end
@@ -629,8 +629,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             venison_EF = venison_EF + added
         end
         Citizen.Wait(100)
-        if venison_EF > 2000 then
-            venison_EF = 2000
+        if venison_EF > 5000 then
+            venison_EF = 5000
         elseif venison_EF <= 0 then
             venison_EF = 1
         end
@@ -644,8 +644,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             beef_EF = beef_EF + added
         end
         Citizen.Wait(100)
-        if beef_EF > 2000 then
-            beef_EF = 2000
+        if beef_EF > 5000 then
+            beef_EF = 5000
         elseif beef_EF <= 0 then
             beef_EF = 1
         end
@@ -659,8 +659,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             aligatormeat_EF = aligatormeat_EF + added
         end
         Citizen.Wait(100)
-        if aligatormeat_EF > 2000 then
-            aligatormeat_EF = 2000
+        if aligatormeat_EF > 5000 then
+            aligatormeat_EF = 5000
         elseif aligatormeat_EF <= 0 then
             aligatormeat_EF = 1
         end
@@ -674,8 +674,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             bird_EF = bird_EF + added
         end
         Citizen.Wait(100)
-        if bird_EF > 2000 then
-            bird_EF = 2000
+        if bird_EF > 5000 then
+            bird_EF = 5000
         elseif bird_EF <= 0 then
             bird_EF = 1
         end
@@ -689,8 +689,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             game_EF = game_EF + added
         end
         Citizen.Wait(100)
-        if game_EF > 2000 then
-            game_EF = 2000
+        if game_EF > 5000 then
+            game_EF = 5000
         elseif game_EF <= 0 then
             game_EF = 1
         end
@@ -704,8 +704,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             pork_EF = pork_EF + added
         end
         Citizen.Wait(100)
-        if pork_EF > 2000 then
-            pork_EF = 2000
+        if pork_EF > 5000 then
+            pork_EF = 5000
         elseif pork_EF <= 0 then
             pork_EF = 1
         end
@@ -719,8 +719,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             fishmeat_EF = fishmeat_EF + added
         end
         Citizen.Wait(100)
-        if fishmeat_EF > 2000 then
-            fishmeat_EF = 2000
+        if fishmeat_EF > 5000 then
+            fishmeat_EF = 5000
         elseif fishmeat_EF <= 0 then
             fishmeat_EF = 1
         end
@@ -734,8 +734,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             herptile_EF = herptile_EF + added
         end
         Citizen.Wait(100)
-        if herptile_EF > 2000 then
-            herptile_EF = 2000
+        if herptile_EF > 5000 then
+            herptile_EF = 5000
         elseif herptile_EF <= 0 then
             herptile_EF = 1
         end
@@ -749,8 +749,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             stringy_EF = stringy_EF + added
         end
         Citizen.Wait(100)
-        if stringy_EF > 2000 then
-            stringy_EF = 2000
+        if stringy_EF > 5000 then
+            stringy_EF = 5000
         elseif stringy_EF <= 0 then
             stringy_EF = 1
         end
@@ -764,8 +764,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             mutton_EF = mutton_EF + added
         end
         Citizen.Wait(100)
-        if mutton_EF > 2000 then
-            mutton_EF = 2000
+        if mutton_EF > 5000 then
+            mutton_EF = 5000
         elseif mutton_EF <= 0 then
             mutton_EF = 1
         end
@@ -779,8 +779,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             blueberry_EF = blueberry_EF + added
         end
         Citizen.Wait(100)
-        if blueberry_EF > 2000 then
-            blueberry_EF = 2000
+        if blueberry_EF > 5000 then
+            blueberry_EF = 5000
         elseif blueberry_EF <= 0 then
             blueberry_EF = 1
         end
@@ -794,8 +794,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             cloth_EF = cloth_EF + added
         end
         Citizen.Wait(100)
-        if cloth_EF > 2000 then
-            cloth_EF = 2000
+        if cloth_EF > 5000 then
+            cloth_EF = 5000
         elseif cloth_EF <= 0 then
             cloth_EF = 1
         end
@@ -809,8 +809,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             rope_EF = rope_EF + added
         end
         Citizen.Wait(100)
-        if rope_EF > 2000 then
-            rope_EF = 2000
+        if rope_EF > 5000 then
+            rope_EF = 5000
         elseif rope_EF <= 0 then
             rope_EF = 1
         end
@@ -824,8 +824,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             woodenplanks_EF = woodenplanks_EF + added
         end
         Citizen.Wait(100)
-        if woodenplanks_EF > 2000 then
-            woodenplanks_EF = 2000
+        if woodenplanks_EF > 5000 then
+            woodenplanks_EF = 5000
         elseif woodenplanks_EF <= 0 then
             woodenplanks_EF = 1
         end
@@ -839,8 +839,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             stones_EF = stones_EF + added
         end
         Citizen.Wait(100)
-        if stones_EF > 2000 then
-            stones_EF = 2000
+        if stones_EF > 5000 then
+            stones_EF = 5000
         elseif stones_EF <= 0 then
             stones_EF = 1
         end
@@ -854,8 +854,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             hitch_EF = hitch_EF + added
         end
         Citizen.Wait(100)
-        if hitch_EF > 2000 then
-            hitch_EF = 2000
+        if hitch_EF > 5000 then
+            hitch_EF = 5000
         elseif hitch_EF <= 0 then
             hitch_EF = 1
         end
@@ -869,8 +869,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             woodenlogs_EF = woodenlogs_EF + added
         end
         Citizen.Wait(100)
-        if woodenlogs_EF > 2000 then
-            woodenlogs_EF = 2000
+        if woodenlogs_EF > 5000 then
+            woodenlogs_EF = 5000
         elseif woodenlogs_EF <= 0 then
             woodenlogs_EF = 1
         end
@@ -884,8 +884,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             tent_EF = tent_EF + added
         end
         Citizen.Wait(100)
-        if tent_EF > 2000 then
-            tent_EF = 2000
+        if tent_EF > 5000 then
+            tent_EF = 5000
         elseif tent_EF <= 0 then
             tent_EF = 1
         end
@@ -899,8 +899,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             stick_EF = stick_EF + added
         end
         Citizen.Wait(100)
-        if stick_EF > 2000 then
-            stick_EF = 2000
+        if stick_EF > 5000 then
+            stick_EF = 5000
         elseif stick_EF <= 0 then
             stick_EF = 1
         end
@@ -914,8 +914,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             emptybottle_EF = emptybottle_EF + added
         end
         Citizen.Wait(100)
-        if emptybottle_EF > 2000 then
-            emptybottle_EF = 2000
+        if emptybottle_EF > 5000 then
+            emptybottle_EF = 5000
         elseif emptybottle_EF <= 0 then
             emptybottle_EF = 1
         end
@@ -929,8 +929,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             golden_nugget_EF = golden_nugget_EF + added
         end
         Citizen.Wait(100)
-        if golden_nugget_EF > 2000 then
-            golden_nugget_EF = 2000
+        if golden_nugget_EF > 5000 then
+            golden_nugget_EF = 5000
         elseif golden_nugget_EF <= 0 then
             golden_nugget_EF = 1
         end
@@ -944,8 +944,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             goldbar_EF = goldbar_EF + added
         end
         Citizen.Wait(100)
-        if goldbar_EF > 2000 then
-            goldbar_EF = 2000
+        if goldbar_EF > 5000 then
+            goldbar_EF = 5000
         elseif goldbar_EF <= 0 then
             goldbar_EF = 1
         end
@@ -959,8 +959,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             apple_EF = apple_EF + added
         end
         Citizen.Wait(100)
-        if apple_EF > 2000 then
-            apple_EF = 2000
+        if apple_EF > 5000 then
+            apple_EF = 5000
         elseif apple_EF <= 0 then
             apple_EF = 1
         end
@@ -974,8 +974,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             bread_EF = bread_EF + added
         end
         Citizen.Wait(100)
-        if bread_EF > 2000 then
-            bread_EF = 2000
+        if bread_EF > 5000 then
+            bread_EF = 5000
         elseif bread_EF <= 0 then
             bread_EF = 1
         end
@@ -989,8 +989,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             water_EF = water_EF + added
         end
         Citizen.Wait(100)
-        if water_EF > 2000 then
-            water_EF = 2000
+        if water_EF > 5000 then
+            water_EF = 5000
         elseif water_EF <= 0 then
             water_EF = 1
         end
@@ -1004,8 +1004,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             cigar_EF = cigar_EF + added
         end
         Citizen.Wait(100)
-        if cigar_EF > 2000 then
-            cigar_EF = 2000
+        if cigar_EF > 5000 then
+            cigar_EF = 5000
         elseif cigar_EF <= 0 then
             cigar_EF = 1
         end
@@ -1019,8 +1019,8 @@ AddEventHandler('UpdateEconomy', function( transaction, product, amount)
             wheat_EF = wheat_EF + added
         end
         Citizen.Wait(100)
-        if wheat_EF > 2000 then
-            wheat_EF = 2000
+        if wheat_EF > 5000 then
+            wheat_EF = 5000
         elseif wheat_EF <= 0 then
             wheat_EF = 1
         end
@@ -1266,14 +1266,16 @@ AddEventHandler('FetchEconomyData', function(item)
 end)
 
 --============================================================Economy Timer=======================================================================
-local timer = 120000 --10 minutes = 600 (10*60)
+local time_tick = (1000*60) --1 minute tick
+local timer = time_tick*20 --20 minutes
+local timer_active = timer --20 minutes
 local timeron = true
-
+local consume = 5
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         local _source = source
-        local tick = 600000 --ticker = 10minutes
+        print("Timeron: timer="..timer_active.." tick="..time_tick)
         --meat
         local p1 = 'biggame'
         local p2 = 'venison'
@@ -1305,72 +1307,74 @@ Citizen.CreateThread(function()
         local p28 = 'cigar'
 
         if timeron then
-            if timer <= 0 then
+            if timer_active <= 0 then
                 --meat
-                TriggerEvent('UpdateEconomy', 1, p1, 20)
+                TriggerEvent('UpdateEconomy', 1, p1, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p2, 20)
+                TriggerEvent('UpdateEconomy', 1, p2, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p3, 20)
+                TriggerEvent('UpdateEconomy', 1, p3, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p4, 20)
+                TriggerEvent('UpdateEconomy', 1, p4, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p5, 20)
+                TriggerEvent('UpdateEconomy', 1, p5, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p6, 20)
+                TriggerEvent('UpdateEconomy', 1, p6, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p7, 20)
+                TriggerEvent('UpdateEconomy', 1, p7, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p8, 20)
+                TriggerEvent('UpdateEconomy', 1, p8, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p9, 20)
+                TriggerEvent('UpdateEconomy', 1, p9, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p10, 20)
+                TriggerEvent('UpdateEconomy', 1, p10, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p11, 20)
+                TriggerEvent('UpdateEconomy', 1, p11, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p12, 20)
+                TriggerEvent('UpdateEconomy', 1, p12, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p13, 20)
+                TriggerEvent('UpdateEconomy', 1, p13, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p14, 20)
+                TriggerEvent('UpdateEconomy', 1, p14, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p15, 20)
+                TriggerEvent('UpdateEconomy', 1, p15, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p16, 20)
+                TriggerEvent('UpdateEconomy', 1, p16, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p17, 20)
+                TriggerEvent('UpdateEconomy', 1, p17, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p18, 20)
+                TriggerEvent('UpdateEconomy', 1, p18, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p19, 20)
+                TriggerEvent('UpdateEconomy', 1, p19, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p20, 20)
+                TriggerEvent('UpdateEconomy', 1, p20, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p21, 20)
+                TriggerEvent('UpdateEconomy', 1, p21, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p22, 20)
+                TriggerEvent('UpdateEconomy', 1, p22, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p23, 20)
+                TriggerEvent('UpdateEconomy', 1, p23, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p24, 20)
+                TriggerEvent('UpdateEconomy', 1, p24, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p25, 20)
+                TriggerEvent('UpdateEconomy', 1, p25, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p26, 20)
+                TriggerEvent('UpdateEconomy', 1, p26, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p27, 20)
+                TriggerEvent('UpdateEconomy', 1, p27, consume)
                 Citizen.Wait(1)
-                TriggerEvent('UpdateEconomy', 1, p28, 20)
-                    Citizen.Wait(5000)
-                    timer = 600000
+                TriggerEvent('UpdateEconomy', 1, p28, consume)
+                    Citizen.Wait(time_tick)
+                    timer_active = timer
                     print("Economy Updated")
             else
-            Citizen.Wait(tick)
-            timer = (timer-tick)
+            Citizen.Wait(time_tick)
+            timer_active = (timer_active-time_tick)
             end
         else
-            Citizen.Wait(60000)
+            Citizen.Wait(time_tick)
+            timer_active = (timer-time_tick)
+            timeron = true
         end
     end
 end)

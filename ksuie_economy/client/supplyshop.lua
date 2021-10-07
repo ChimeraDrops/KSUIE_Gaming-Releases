@@ -7,13 +7,6 @@ TriggerEvent("redemrp_menu_base:getData",function(call)
     MenuData = call
 end)
 
-local supplyshop = {
-
-    {x = 581.09, y = 1698.87, z = 187.44},
---    {x = 00, y = 00, z = 00},
- 
- }
-
 --ADD LOCAL SUPPLY SHOP VARIABLES
 local cloth_econFactor
 local stones_econFactor
@@ -42,6 +35,7 @@ local rope_price
 local woodenplanks_price
 local hitch_price
 local tent_price
+local populated = false
 
 
 RegisterNetEvent("Client:supplyshop:ReceiveEconVariables")
@@ -137,7 +131,20 @@ Citizen.CreateThread(function()
         local coords = GetEntityCoords(player)
         local isInMarker, currentZone = false
 
-        for k,v in ipairs(supplyshop) do
+        for k,v in ipairs(Config.SupplyShop.coords) do
+            if populated == false then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 100) then
+                    local h = v.h
+                    TriggerEvent('Populate:SupplyShop', v.x, v.y, v.z, h)
+                    populated = true
+                end
+            end
+            if populated == true then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) > 150) then
+                    populated = false
+                end
+            end
+
             if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 1.5) then
                 isInMarker  = true
                 currentZone = 'supplyshop'

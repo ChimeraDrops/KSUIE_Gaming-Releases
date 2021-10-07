@@ -6,13 +6,6 @@ TriggerEvent("redemrp_menu_base:getData",function(call)
     MenuData = call
 end)
 
-local Provisionshop = {
-
-    {x = 584.56, y = 1694.75, z = 187.39},
---    {x = 00, y = 00, z = 00},
- 
- }
-
 local wheat_econFactor
 local apple_econFactor
 local blueberry_econFactor
@@ -31,6 +24,7 @@ local blueberry_price
 local bread_price
 local water_price
 local cigar_price
+local populated = false
 
 
 RegisterNetEvent("Client:provisionshop:ReceiveEconVariables")
@@ -112,11 +106,25 @@ Citizen.CreateThread(function()
         local coords = GetEntityCoords(player)
         local isInMarker, currentZone = false
 
-        for k,v in ipairs(Provisionshop) do
+        for k,v in ipairs(Config.ProvisionShop.coords) do
+            if populated == false then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 100) then
+                    local h = v.h
+                    TriggerEvent('Populate:ProvisionShop', v.x, v.y, v.z, h)
+                    populated = true
+                end
+            end
+            if populated == true then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) > 150) then
+                    populated = false
+                end
+            end
+
             if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 1.5) then
                 isInMarker  = true
                 currentZone = 'Provisionshop'
                 lastZone    = 'Provisionshop'
+
             end
         end
 

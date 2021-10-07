@@ -7,11 +7,6 @@ TriggerEvent("redemrp_menu_base:getData",function(call)
 end)
 
 --Gold Shop Locations
-local goldshop = {
-    {x = 559.65, y = 1696.67, z = 185.88},
---    {x = 00, y = 00, z = 00},
-}
-
 --Gold Shop Variables
 local golden_nugget_econFactor
 local goldbar_econFactor
@@ -19,6 +14,7 @@ local golden_nugget_multi
 local goldbar_multi
 local golden_nugget_price
 local goldbar_price
+local populated = false
 
 RegisterNetEvent("Client:goldshop:ReceiveEconVariables")
 AddEventHandler("Client:goldshop:ReceiveEconVariables", function(item, efac, mult, price)
@@ -78,7 +74,19 @@ Citizen.CreateThread(function()
         local coords = GetEntityCoords(player)
         local isInMarker, gcurrentZone = false
 
-        for k,v in ipairs(goldshop) do
+        for k,v in ipairs(Config.GoldShop.coords) do
+            if populated == false then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 100) then
+                    local h = v.h
+                    TriggerEvent('Populate:GoldShop', v.x, v.y, v.z, h)
+                    populated = true
+                end
+            end
+            if populated == true then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) > 150) then
+                    populated = false
+                end
+            end
             if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 1.5) then
                 isInMarker  = true
                 gcurrentZone = 'goldshop'

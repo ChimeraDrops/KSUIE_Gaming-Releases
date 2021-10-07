@@ -6,13 +6,6 @@ TriggerEvent("redemrp_menu_base:getData",function(call)
     MenuData = call
 end)
 
-local butchershop = {
-
-    {x = 591.77, y = 1689.97, z = 187.45},
---    {x = 00, y = 00, z = 00},
- 
- }
- 
 --Variables for Economy Calculations
 --MEATSHOP:
 local biggame_econFactor
@@ -48,6 +41,7 @@ local pork_price
 local fishmeat_price
 local herptile_price
 local stringy_price
+local populated = false
 
 
 RegisterNetEvent("Client:meatshop:ReceiveEconVariables")
@@ -165,11 +159,25 @@ Citizen.CreateThread(function()
         local coords = GetEntityCoords(player)
         local isInMarker, currentZone = false
 
-        for k,v in ipairs(butchershop) do
+        for k,v in ipairs(Config.MeatShop.coords) do
+            if populated == false then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 100) then
+                    local h = v.h
+                    TriggerEvent('Populate:MeatShop', v.x, v.y, v.z, h)
+                    populated = true
+                end
+            end
+            if populated == true then
+                if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) > 150) then
+                    populated = false
+                end
+            end
+
             if (Vdist(coords.x, coords.y, coords.z, v.x, v.y, v.z) < 1.5) then
                 isInMarker  = true
                 currentZone = 'butchershop'
                 lastZone    = 'butchershop'
+
             end
         end
 
