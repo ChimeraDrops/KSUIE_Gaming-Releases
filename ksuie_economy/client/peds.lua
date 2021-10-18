@@ -52,21 +52,21 @@ Peds_miners = {
     }
 
 AddEventHandler('Populate:GoldShop', function(x,y,z,h)
-    print("LOADING PEDS")
+   --print("LOADING PEDS")
     local pedmodel = Peds_miners[math.random(1,9)]
     local model = GetHashKey(pedmodel.model)
-    print(model)
+   --print(model)
     RequestModel(model)
     while not HasModelLoaded(model) do
         Citizen.Wait(100)
-        print("ped loading")
+       --print("ped loading")
     end
     Citizen.Wait(800)
     if HasModelLoaded(model) then
-        print("model has loaded")
-        newPed = CreatePed_2(model, x, y, z, h, true, false, false, false)
+       --print("model has loaded")
+        newPed = CreatePed_2(model, x, y, z, h, false, false, false, false)
         Citizen.InvokeNative(0x9587913B9E772D29, newPed, true)--Set entity on ground properly
-        print("x="..x.." y="..y.." z="..z.." h="..h)
+       --print("x="..x.." y="..y.." z="..z.." h="..h)
         Citizen.InvokeNative(0x4AD96EF928BD4F9A, model) --model no longer neaded
         Citizen.InvokeNative(0x77FF8D35EEC6BBC4, newPed, 0, true) --SetPedOutfitPreset
         Citizen.InvokeNative(0x283978A15512B2FE, newPed, false) --SetRandomOutfitVariation Native
@@ -78,21 +78,21 @@ AddEventHandler('Populate:GoldShop', function(x,y,z,h)
 end)
 
 AddEventHandler('Populate:MeatShop', function(x,y,z,h)
-    print("LOADING PEDS")
+   --print("LOADING PEDS")
     local pedmodel = Peds_butchers[math.random(1,3)]
     local model = GetHashKey(pedmodel.model)
-    print(model)
+   --print(model)
     RequestModel(model)
     while not HasModelLoaded(model) do
         Citizen.Wait(100)
-        print("ped loading")
+       --print("ped loading")
     end
     Citizen.Wait(800)
     if HasModelLoaded(model) then
-        print("model has loaded")
-        newPed = CreatePed_2(model, x, y, z, h, true, false, false, false)
+       --print("model has loaded")
+        newPed = CreatePed_2(model, x, y, z, h, false, false, false, false)
         Citizen.InvokeNative(0x9587913B9E772D29, newPed, true)--Set entity on ground properly
-        print("x="..x.." y="..y.." z="..z.." h="..h)
+       --print("x="..x.." y="..y.." z="..z.." h="..h)
         Citizen.InvokeNative(0x4AD96EF928BD4F9A, model) --model no longer neaded
         Citizen.InvokeNative(0x77FF8D35EEC6BBC4, newPed, 0, true) --SetPedOutfitPreset
         Citizen.InvokeNative(0x283978A15512B2FE, newPed, false) --SetRandomOutfitVariation Native
@@ -104,21 +104,21 @@ AddEventHandler('Populate:MeatShop', function(x,y,z,h)
 end)
 
 AddEventHandler('Populate:ProvisionShop', function(x,y,z,h)
-    print("LOADING PEDS")
+   --print("LOADING PEDS")
     local pedmodel = Peds_bartenders[math.random(1,10)]
     local model = GetHashKey(pedmodel.model)
-    print(model)
+   --print(model)
     RequestModel(model)
     while not HasModelLoaded(model) do
         Citizen.Wait(100)
-        print("ped loading")
+       --print("ped loading")
     end
     Citizen.Wait(800)
     if HasModelLoaded(model) then
-        print("model has loaded")
-        newPed = CreatePed_2(model, x, y, z, h, true, false, false, false)
+       --print("model has loaded")
+        newPed = CreatePed_2(model, x, y, z, h, false, false, false, false)
         Citizen.InvokeNative(0x9587913B9E772D29, newPed, true)--Set entity on ground properly
-        print("x="..x.." y="..y.." z="..z.." h="..h)
+       --print("x="..x.." y="..y.." z="..z.." h="..h)
         Citizen.InvokeNative(0x4AD96EF928BD4F9A, model) --model no longer neaded
         Citizen.InvokeNative(0x77FF8D35EEC6BBC4, newPed, 0, true) --SetPedOutfitPreset
         Citizen.InvokeNative(0x283978A15512B2FE, newPed, false) --SetRandomOutfitVariation Native
@@ -130,21 +130,21 @@ AddEventHandler('Populate:ProvisionShop', function(x,y,z,h)
 end)
 
 AddEventHandler('Populate:SupplyShop', function(x,y,z,h)
-    print("LOADING PEDS")
+   --print("LOADING PEDS")
     local pedmodel = Peds_generalstore[math.random(1,8)]
     local model = GetHashKey(pedmodel.model)
-    print(model)
+   --print(model)
     RequestModel(model)
     while not HasModelLoaded(model) do
         Citizen.Wait(100)
-        print("ped loading")
+       --print("ped loading")
     end
     Citizen.Wait(800)
     if HasModelLoaded(model) then
-        print("model has loaded")
-        newPed = CreatePed_2(model, x, y, z, h, true, false, false, false)
+       --print("model has loaded")
+        newPed = CreatePed_2(model, x, y, z, h, false, false, false, false)
         Citizen.InvokeNative(0x9587913B9E772D29, newPed, true)--Set entity on ground properly
-        print("x="..x.." y="..y.." z="..z.." h="..h)
+       --print("x="..x.." y="..y.." z="..z.." h="..h)
         Citizen.InvokeNative(0x4AD96EF928BD4F9A, model) --model no longer neaded
         Citizen.InvokeNative(0x77FF8D35EEC6BBC4, newPed, 0, true) --SetPedOutfitPreset
         Citizen.InvokeNative(0x283978A15512B2FE, newPed, false) --SetRandomOutfitVariation Native
