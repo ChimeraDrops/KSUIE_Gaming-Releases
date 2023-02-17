@@ -1,5 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local refund = 0
+
 RegisterNetEvent('ksuie-veh:server:checkfunds', function(data)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -9,9 +11,11 @@ RegisterNetEvent('ksuie-veh:server:checkfunds', function(data)
         local totalPrice= Config.RentalCars[model].price
         if Player.Functions.GetMoney('cash') >= totalPrice then
             Player.Functions.RemoveMoney('cash', totalPrice)
+            refund = totalPrice
             TriggerClientEvent('RentCarSelected',src, data)
         elseif Player.Functions.GetMoney('bank') >= totalPrice then
             Player.Functions.RemoveMoney('bank', totalPrice)
+            refund = totalPrice
             TriggerClientEvent('RentCarSelected',src, data)
         else
             QBCore.Functions.Notify(src, 'Get yo broke ass out of here.', 'error', 3000)
@@ -20,9 +24,11 @@ RegisterNetEvent('ksuie-veh:server:checkfunds', function(data)
         local totalPrice = Config.BoatRental[model].price
         if Player.Functions.GetMoney('cash') >= totalPrice then
             Player.Functions.RemoveMoney('cash', totalPrice)
+            refund = totalPrice
             TriggerClientEvent('RentCarSelected',src, data)
         elseif Player.Functions.GetMoney('bank') >= totalPrice then
             Player.Functions.RemoveMoney('bank', totalPrice)
+            refund = totalPrice
             TriggerClientEvent('RentCarSelected',src, data)
         else
             QBCore.Functions.Notify(src, 'Get yo broke ass out of here.', 'error', 3000)
@@ -33,6 +39,7 @@ end)
 
 RegisterNetEvent('ksuie-vehrental:server:RentCarSelected', function(DataForward)
     local src= source
+    local Player = QBCore.Functions.GetPlayer(src)
     local found = false
     local foundslot = false
     for i,j in pairs(Config.SpawnSlots[DataForward.data]) do
@@ -49,6 +56,7 @@ RegisterNetEvent('ksuie-vehrental:server:RentCarSelected', function(DataForward)
     end
     if not foundslot then
         QBCore.Functions.Notify(src, 'No Empty Slots Available', 'error', 3000)
+        Player.Functions.AddMoney('cash', refund)
     end
 end)
 
