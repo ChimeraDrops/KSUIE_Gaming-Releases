@@ -12,7 +12,7 @@ CreateThread(function()
             Wait(0)
         end
 
-        RentalPed[k] = CreatePed(0, current, v["pedcoords"].x, v["pedcoords"].y, v["pedcoords"].z, v["pedcoords"].w, false, false)
+        RentalPed[k] = CreatePed(0, current, v["pedcoords"].x, v["pedcoords"].y, v["pedcoords"].z-1, v["pedcoords"].w, false, false)
         TaskStartScenarioInPlace(RentalPed[k], v["scenario"], 0, true)
         FreezeEntityPosition(RentalPed[k], true)
         SetEntityInvincible(RentalPed[k], true)
